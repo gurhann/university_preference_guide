@@ -10,6 +10,9 @@
 	<properties>
 		<jersey2.version>2.25</jersey2.version>
 		<mongo.version>3.4.2</mongo.version>
+		<guice.version>4.0</guice.version>
+		<servlet.version>3.1.0</servlet.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 
 	<dependencies>
@@ -34,8 +37,27 @@
 			<artifactId>mongodb-driver</artifactId>
 			<version>${mongo.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
 	</dependencies>
-
 
 	<build>
 		<finalName>UniversityPreferenceGuideApi</finalName>
