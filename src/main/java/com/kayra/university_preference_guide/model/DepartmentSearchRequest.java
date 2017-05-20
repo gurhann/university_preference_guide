@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kayra.university_preference_guide.constant.Scholarship;
 
-public class DepartmentSearch {
+public class DepartmentSearchRequest {
 
 	private List<University> universityList;
 	private List<Faculty> facultyList;
@@ -212,7 +212,7 @@ public class DepartmentSearch {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DepartmentSearch other = (DepartmentSearch) obj;
+		DepartmentSearchRequest other = (DepartmentSearchRequest) obj;
 		if (facultyList == null) {
 			if (other.facultyList != null)
 				return false;

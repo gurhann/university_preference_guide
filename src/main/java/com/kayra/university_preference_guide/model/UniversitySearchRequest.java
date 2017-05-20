@@ -2,17 +2,17 @@ package com.kayra.university_preference_guide.model;
 
 import java.util.List;
 
-public class UniversitySearch {
+public class UniversitySearchRequest implements ExtInfoSearch {
 
-	private List<University> universityList;
+	private List<City> cityList;
 	private Boolean isPrivate;
 
-	public List<University> getUniversityList() {
-		return universityList;
+	public List<City> getCityList() {
+		return cityList;
 	}
 
-	public void setUniversityList(List<University> universityList) {
-		this.universityList = universityList;
+	public void setCityList(List<City> cityList) {
+		this.cityList = cityList;
 	}
 
 	public Boolean getIsPrivate() {
@@ -27,8 +27,8 @@ public class UniversitySearch {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((cityList == null) ? 0 : cityList.hashCode());
 		result = prime * result + ((isPrivate == null) ? 0 : isPrivate.hashCode());
-		result = prime * result + ((universityList == null) ? 0 : universityList.hashCode());
 		return result;
 	}
 
@@ -40,23 +40,23 @@ public class UniversitySearch {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UniversitySearch other = (UniversitySearch) obj;
+		UniversitySearchRequest other = (UniversitySearchRequest) obj;
+		if (cityList == null) {
+			if (other.cityList != null)
+				return false;
+		} else if (!cityList.equals(other.cityList))
+			return false;
 		if (isPrivate == null) {
 			if (other.isPrivate != null)
 				return false;
 		} else if (!isPrivate.equals(other.isPrivate))
-			return false;
-		if (universityList == null) {
-			if (other.universityList != null)
-				return false;
-		} else if (!universityList.equals(other.universityList))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "UniversitySearch [universityList=" + universityList + ", isPrivate=" + isPrivate + "]";
+		return "UniversitySearchRequest [cityList=" + cityList + ", isPrivate=" + isPrivate + "]";
 	}
 
 }
