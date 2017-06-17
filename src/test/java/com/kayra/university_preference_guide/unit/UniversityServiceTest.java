@@ -1,6 +1,7 @@
 package com.kayra.university_preference_guide.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -45,12 +46,18 @@ public class UniversityServiceTest {
 		UniversitySearchRequest reqUniSearch = new UniversitySearchRequest();
 		reqUniSearch.setIsPrivate(Boolean.FALSE);
 		reqUniSearch.setCityList(Arrays.asList(new City("ERZURUM")));
-		List<University> universities = universityService.getUniversities(reqUniSearch);
-		assertEquals(docList.size(), universities.size());
-		for (int i = 0; i < docList.size(); i++) {
-			assertEquals(docList.get(i).getBoolean("isPrivate"), universities.get(i).isPrivate());
-			assertEquals(docList.get(i).getString("city"), universities.get(i).getCity().getName());
-			assertEquals(docList.get(i).getString("name"), universities.get(i).getName());
+		List<University> universities;
+		try {
+			universities = universityService.getUniversities(reqUniSearch);
+
+			assertEquals(docList.size(), universities.size());
+			for (int i = 0; i < docList.size(); i++) {
+				assertEquals(docList.get(i).getBoolean("isPrivate"), universities.get(i).isPrivate());
+				assertEquals(docList.get(i).getString("city"), universities.get(i).getCity().getName());
+				assertEquals(docList.get(i).getString("name"), universities.get(i).getName());
+			}
+		} catch (UnknownInfoTypeException | InfoTypeNullException e) {
+			fail();
 		}
 	}
 
@@ -72,5 +79,5 @@ public class UniversityServiceTest {
 		return docList;
 
 	}
-	
+
 }

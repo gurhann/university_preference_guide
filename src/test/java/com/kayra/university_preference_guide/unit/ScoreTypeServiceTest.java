@@ -1,6 +1,7 @@
 package com.kayra.university_preference_guide.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -38,10 +39,15 @@ public class ScoreTypeServiceTest {
 	@Test
 	public void getDepartmentsTest() {
 		List<Document> docList = initialMockData();
-		List<ScoreType> scoreTypes = scoreTypeService.getScoreTypes();
-		assertEquals(docList.size(), scoreTypes.size());
-		for (int i = 0; i < docList.size(); i++) {
-			assertEquals(docList.get(i).getString("value"), scoreTypes.get(i).getName());
+		List<ScoreType> scoreTypes;
+		try {
+			scoreTypes = scoreTypeService.getScoreTypes();
+			assertEquals(docList.size(), scoreTypes.size());
+			for (int i = 0; i < docList.size(); i++) {
+				assertEquals(docList.get(i).getString("value"), scoreTypes.get(i).getName());
+			}
+		} catch (UnknownInfoTypeException | InfoTypeNullException e) {
+			fail();
 		}
 	}
 
