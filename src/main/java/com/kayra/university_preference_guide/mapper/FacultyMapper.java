@@ -23,7 +23,7 @@ public class FacultyMapper {
 
 	public static Faculty document2Faculty(Document doc) {
 		Faculty faculty = new Faculty();
-		faculty.setName(doc.getString("name"));
+		faculty.setName(doc.getString("value"));
 		return faculty;
 	}
 }

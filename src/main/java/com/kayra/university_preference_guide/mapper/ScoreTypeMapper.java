@@ -23,7 +23,7 @@ public class ScoreTypeMapper {
 
 	public static ScoreType document2ScoreType(Document doc) {
 		ScoreType scoreType = new ScoreType();
-		scoreType.setName(doc.getString("name"));
+		scoreType.setName(doc.getString("value"));
 		return scoreType;
 	}
 
