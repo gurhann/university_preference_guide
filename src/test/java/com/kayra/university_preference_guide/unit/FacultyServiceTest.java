@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,25 +26,26 @@ import com.kayra.university_preference_guide.service.imp.FacultyServiceImpl;
 public class FacultyServiceTest {
 
 	@InjectMocks
-	public FacultyService facultyService = new FacultyServiceImpl();
+	public FacultyService facultyService;
 
 	@Mock
 	public MongoDriver mongoDriver;
 
-	@BeforeClass
+	@Before
 	public void init() {
+		facultyService = new FacultyServiceImpl(mongoDriver);
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
 	public void getDepartmentsTest() {
 		List<Document> docList = initialMockData();
-		List<Faculty> scoreTypes;
+		List<Faculty> facultyList;
 		try {
-			scoreTypes = facultyService.getFaculties();
-			assertEquals(docList.size(), scoreTypes.size());
+			facultyList = facultyService.getFaculties();
+			assertEquals(docList.size(), facultyList.size());
 			for (int i = 0; i < docList.size(); i++) {
-				assertEquals(docList.get(i).getString("value"), scoreTypes.get(i).getName());
+				assertEquals(docList.get(i).getString("value"), facultyList.get(i).getName());
 			}
 		} catch (UnknownInfoTypeException | InfoTypeNullException e) {
 			fail();
@@ -52,7 +53,7 @@ public class FacultyServiceTest {
 	}
 
 	private List<Document> initialMockData() {
-		ExtInfoSearchRequest req = new ExtInfoSearchRequest(InfoType.SCORE_TYPE);
+		ExtInfoSearchRequest req = new ExtInfoSearchRequest(InfoType.FACULTY);
 		List<Document> docList = Arrays.asList(new Document("value", "İşletme Fakültesi"), new Document("value", "Yaşam ve Doğa Bilimleri Fakültesi"),
 				new Document("value", "Mühendislik-Mimarlık Fakültesi"));
 		try {
