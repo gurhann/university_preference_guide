@@ -8,6 +8,7 @@ public class DepartmentSearchRequest {
 
 	private List<University> universityList;
 	private List<Faculty> facultyList;
+	private List<String> departmentNameList;
 	private Boolean isThereEmptyScape;
 	private List<ScoreType> scoreTypeList;
 	private Double minPointStart;
@@ -40,6 +41,14 @@ public class DepartmentSearchRequest {
 
 	public void setFacultyList(List<Faculty> facultyList) {
 		this.facultyList = facultyList;
+	}
+
+	public List<String> getDepartmentNameList() {
+		return departmentNameList;
+	}
+
+	public void setDepartmentNameList(List<String> departmentNameList) {
+		this.departmentNameList = departmentNameList;
 	}
 
 	public Boolean getIsThereEmptyScape() {

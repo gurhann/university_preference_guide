@@ -92,6 +92,7 @@ public class MongoDriver {
 		List<Bson> andParams = new ArrayList<>();
 		checkUniversityList(req.getUniversityList(), andParams);
 		checkFacultyList(req.getFacultyList(), andParams);
+		checkDepartmentNameList(req.getDepartmentNameList(), andParams);
 		checkScoreTypeList(req.getScoreTypeList(), andParams);
 		checkMinPoints(req.getMinPointStart(), req.getMinPointEnd(), andParams);
 		checkMaxPoints(req.getMaxPointStart(), req.getMaxPointEnd(), andParams);
@@ -132,6 +133,20 @@ public class MongoDriver {
 			}
 
 			andParams.add(or((Iterable<Bson>) facultyDocList));
+		}
+	}
+
+	private void checkDepartmentNameList(List<String> departmentNameList, List<Bson> andParams) {
+		if (CollectionUtils.isNotEmpty(departmentNameList)) {
+			List<Bson> departmentDocList = new ArrayList<>();
+
+			for (String departmentName : departmentNameList) {
+				Document departmentDoc = new Document();
+				departmentDoc.append("name", departmentName);
+				departmentDocList.add(departmentDoc);
+			}
+
+			andParams.add(or((Iterable<Bson>) departmentDocList));
 		}
 	}
 
