@@ -1,14 +1,13 @@
 package com.kayra.university_preference_guide.unit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,13 +25,14 @@ import com.kayra.university_preference_guide.service.imp.DepartmentServiceImpl;
 public class DepartmentServiceTest {
 
 	@InjectMocks
-	public DepartmentService departmentService = new DepartmentServiceImpl();
+	public DepartmentService departmentService;
 
 	@Mock
 	public MongoDriver mongoDriver;
 
-	@BeforeClass
+	@Before
 	public void init() {
+		departmentService = new DepartmentServiceImpl();
 		MockitoAnnotations.initMocks(this);
 	}
 

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,18 +26,19 @@ import com.kayra.university_preference_guide.service.imp.ScoreTypeServiceImpl;
 public class ScoreTypeServiceTest {
 
 	@InjectMocks
-	public ScoreTypeService scoreTypeService = new ScoreTypeServiceImpl();
+	public ScoreTypeService scoreTypeService;
 
 	@Mock
 	public MongoDriver mongoDriver;
 
-	@BeforeClass
+	@Before
 	public void init() {
+		scoreTypeService = new ScoreTypeServiceImpl(mongoDriver);
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
-	public void getDepartmentsTest() {
+	public void getScoreTypesTest() {
 		List<Document> docList = initialMockData();
 		List<ScoreType> scoreTypes;
 		try {

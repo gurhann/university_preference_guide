@@ -15,9 +15,14 @@ import com.kayra.university_preference_guide.service.CityService;
 
 public class CityServiceImpl implements CityService {
 
+	private MongoDriver driver;
+
+	public CityServiceImpl(MongoDriver driver) {
+		this.driver = driver;
+	}
+
 	@Override
 	public List<City> getCities() throws UnknownInfoTypeException, InfoTypeNullException {
-		MongoDriver driver = MongoDriver.getInstance();
 		ExtInfoSearchRequest req = new ExtInfoSearchRequest(InfoType.CITY);
 		List<Document> cityDocList = driver.getExtInfosBy(req);
 		return CityMapper.documentList2CityList(cityDocList);

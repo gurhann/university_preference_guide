@@ -14,10 +14,15 @@ import com.kayra.university_preference_guide.persistence.MongoDriver;
 import com.kayra.university_preference_guide.service.FacultyService;
 
 public class FacultyServiceImpl implements FacultyService {
+	
+	private MongoDriver driver;
+	
+	public FacultyServiceImpl(MongoDriver driver) {
+		this.driver = driver;
+	}
 
 	@Override
 	public List<Faculty> getFaculties() throws UnknownInfoTypeException, InfoTypeNullException {
-		MongoDriver driver = MongoDriver.getInstance();
 		ExtInfoSearchRequest req = new ExtInfoSearchRequest(InfoType.FACULTY);
 		List<Document> facultyDocList = driver.getExtInfosBy(req);
 		return FacultyMapper.documentList2FacultyList(facultyDocList);

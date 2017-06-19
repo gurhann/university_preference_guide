@@ -26,13 +26,14 @@ import com.kayra.university_preference_guide.service.imp.CityServiceImpl;
 public class CityServiceTest {
 
 	@InjectMocks
-	public CityService cityService = new CityServiceImpl();
+	public CityService cityService;
 
 	@Mock
 	public MongoDriver mongoDriver;
 
 	@Before
 	public void init() {
+		cityService = new CityServiceImpl(mongoDriver);
 		MockitoAnnotations.initMocks(this);
 	}
 

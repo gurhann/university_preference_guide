@@ -14,10 +14,14 @@ import com.kayra.university_preference_guide.persistence.MongoDriver;
 import com.kayra.university_preference_guide.service.ScoreTypeService;
 
 public class ScoreTypeServiceImpl implements ScoreTypeService {
+	private MongoDriver driver;
+
+	public ScoreTypeServiceImpl(MongoDriver driver) {
+		this.driver = driver;
+	}
 
 	@Override
 	public List<ScoreType> getScoreTypes() throws UnknownInfoTypeException, InfoTypeNullException {
-		MongoDriver driver = MongoDriver.getInstance();
 		ExtInfoSearchRequest req = new ExtInfoSearchRequest(InfoType.SCORE_TYPE);
 		List<Document> scoreTypeDocList = driver.getExtInfosBy(req);
 		return ScoreTypeMapper.documentList2ScoreTypeList(scoreTypeDocList);

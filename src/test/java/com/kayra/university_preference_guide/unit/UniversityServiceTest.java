@@ -4,12 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -29,13 +28,14 @@ import com.kayra.university_preference_guide.service.imp.UniversityServiceImpl;
 public class UniversityServiceTest {
 
 	@InjectMocks
-	public UniversityService universityService = new UniversityServiceImpl();
+	public UniversityService universityService;
 
 	@Mock
 	public MongoDriver mongoDriver;
 
-	@BeforeClass
+	@Before
 	public void init() {
+		universityService = new UniversityServiceImpl(mongoDriver);
 		MockitoAnnotations.initMocks(this);
 	}
 
