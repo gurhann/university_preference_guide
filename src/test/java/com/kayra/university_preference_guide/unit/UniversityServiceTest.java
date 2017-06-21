@@ -52,9 +52,10 @@ public class UniversityServiceTest {
 
 			assertEquals(docList.size(), universities.size());
 			for (int i = 0; i < docList.size(); i++) {
-				assertEquals(docList.get(i).getBoolean("isPrivate"), universities.get(i).isPrivate());
-				assertEquals(docList.get(i).getString("city"), universities.get(i).getCity().getName());
-				assertEquals(docList.get(i).getString("name"), universities.get(i).getName());
+				Document doc = (Document)docList.get(i).get("value");
+				assertEquals(doc.getBoolean("isPrivate"), universities.get(i).isPrivate());
+				assertEquals(doc.getString("city"), universities.get(i).getCity().getName());
+				assertEquals(doc.getString("name"), universities.get(i).getName());
 			}
 		} catch (UnknownInfoTypeException | InfoTypeNullException e) {
 			fail();
@@ -68,8 +69,8 @@ public class UniversityServiceTest {
 		reqUniSearch.setCityList(Arrays.asList(new City("ERZURUM")));
 		req.setSearchCriteria(reqUniSearch);
 		//@formatter:off
-		List<Document> docList = Arrays.asList(new Document("name", "ATATÜRK ÜNİVERSİTESİ").append("city", "ERZURUM").append("isPrivate", false),
-											   new Document("name", "ERZURUM TEKNİK ÜNİVERSİTESİ").append("city", "ERZURUM").append("isPrivate", false));
+		List<Document> docList = Arrays.asList(new Document("value",new Document("name", "ATATÜRK ÜNİVERSİTESİ").append("city", "ERZURUM").append("isPrivate", false)),
+											   new Document("value",new Document("name", "ERZURUM TEKNİK ÜNİVERSİTESİ").append("city", "ERZURUM").append("isPrivate", false)));
 		//@formatter:on
 		try {
 			when(mongoDriver.getExtInfosBy(req)).thenReturn(docList);
