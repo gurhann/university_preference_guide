@@ -34,4 +34,10 @@ public class UniversityServiceImpl implements UniversityService {
 		return UniversityMapper.documentList2UniversityList(universsityDocList);
 	}
 
+	@Override
+	public List<University> getAllUniversities() throws UnknownInfoTypeException, InfoTypeNullException {
+		ExtInfoSearchRequest req = new ExtInfoSearchRequest(InfoType.UNIVERSITY);
+		List<Document> universsityDocList = driver.getExtInfosBy(req);
+		return UniversityMapper.documentList2UniversityList(universsityDocList);
+	}
 }

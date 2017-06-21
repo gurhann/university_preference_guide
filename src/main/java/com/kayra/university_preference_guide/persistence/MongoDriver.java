@@ -67,7 +67,11 @@ public class MongoDriver {
 		case FACULTY:
 			return collection.find(new Document("type", "faculty")).sort(new Document("value", 1)).into(new ArrayList<>());
 		case UNIVERSITY:
-			return collection.find(new Document("type", "university")).sort(new Document("value.name", 1)).into(new ArrayList<>());
+			if (req.getSearchCriteria() == null) {
+				return collection.find(new Document("type", "university")).sort(new Document("value.name", 1)).into(new ArrayList<>());
+			} else {
+				// TODO: Universite aramasina gore driverin ici doldurulacak
+			}
 		}
 		throw new UnknownInfoTypeException();
 
