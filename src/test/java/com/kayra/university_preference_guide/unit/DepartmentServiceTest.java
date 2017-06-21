@@ -32,7 +32,7 @@ public class DepartmentServiceTest {
 
 	@Before
 	public void init() {
-		departmentService = new DepartmentServiceImpl();
+		departmentService = new DepartmentServiceImpl(mongoDriver);
 		MockitoAnnotations.initMocks(this);
 	}
 
@@ -43,14 +43,14 @@ public class DepartmentServiceTest {
 		List<Department> departmentList = departmentService.getDepartmentList(req);
 		assertEquals(1, departmentList.size());
 		Department department = departmentList.get(0);
-		assertEquals(new Faculty("Bilgisayar Mühendisliği"), department.getFaculty());
+		assertEquals(new Faculty("Mühendislik Fakültesi"), department.getFaculty());
 		University expectedUniversity = new University("ATATÜRK ÜNİVERSİTESİ");
 		expectedUniversity.setPrivate(Boolean.FALSE);
 		expectedUniversity.setCity(new City("Erzurum"));
 		assertEquals(expectedUniversity, department.getUniversity());
 		assertEquals((short) 62, department.getQuota());
 		assertEquals((short) 62, department.getSettled());
-		assertEquals("MF-4", department.getScoreType());
+		assertEquals("MF-4", department.getScoreType().getName());
 		assertEquals(279.5208, department.getMinPoint(), 4);
 		assertEquals(383.9158, department.getMaxPoint(), 4);
 		assertEquals(166000, department.getSuccesSequence());
@@ -67,7 +67,7 @@ public class DepartmentServiceTest {
 		//@formatter:off
 		when(mongoDriver.getDepartmentBySearchCriteria(req)).thenReturn(Arrays.asList(
 				new Document("name","Bilgisayar Mühendisliği").append(
-						"university", new Document("name","ATATÜRK ÜNİVERSİTESİ").append("city", "ERZURUM").append("isPrivate", false)
+						"university", new Document("name","ATATÜRK ÜNİVERSİTESİ").append("city", "Erzurum").append("isPrivate", false)
 				).append("faculty_name", "Mühendislik Fakültesi").append("quota", 62).append("settled", 62)
 				.append("score_type", "MF-4").append("min_point", 279.5208).append("max_point", 383.9158)
 				.append("success_sequence", 166000).append("top_students_of_school_min_point", 240.34331)
