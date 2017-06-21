@@ -18,6 +18,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import com.google.inject.Singleton;
 import com.kayra.university_preference_guide.constant.Scholarship;
 import com.kayra.university_preference_guide.exception.InfoTypeNullException;
 import com.kayra.university_preference_guide.exception.UnknownInfoTypeException;
@@ -31,21 +32,14 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
+@Singleton
 public class MongoDriver {
-	private static MongoDriver instance;
 	private MongoDatabase db;
 
 	@SuppressWarnings("resource")
-	private MongoDriver() {
+	public MongoDriver() {
 		Properties prop = getProperties();
 		db = new MongoClient(prop.getProperty("host"), Integer.parseInt(prop.getProperty("port"))).getDatabase(prop.getProperty("databaseName"));
-	}
-
-	public static MongoDriver getInstance() {
-		if (instance == null) {
-			instance = new MongoDriver();
-		}
-		return instance;
 	}
 
 	private Properties getProperties() {
@@ -67,13 +61,13 @@ public class MongoDriver {
 		MongoCollection<Document> collection = db.getCollection("ext_infos");
 		switch (req.getInfoType()) {
 		case CITY:
-			return collection.find(new Document("type", "city")).into(new ArrayList<>());
+			return collection.find(new Document("type", "city")).sort(new Document("value", 1)).into(new ArrayList<>());
 		case SCORE_TYPE:
-			return collection.find(new Document("type", "scoreType")).into(new ArrayList<>());
+			return collection.find(new Document("type", "scoreType")).sort(new Document("value", 1)).into(new ArrayList<>());
 		case FACULTY:
-			return collection.find(new Document("type", "faculty")).into(new ArrayList<>());
+			return collection.find(new Document("type", "faculty")).sort(new Document("value", 1)).into(new ArrayList<>());
 		case UNIVERSITY:
-			break;
+			return collection.find(new Document("type", "university")).sort(new Document("value.name", 1)).into(new ArrayList<>());
 		}
 		throw new UnknownInfoTypeException();
 
