@@ -17,7 +17,7 @@ public class UniversityMapper {
 	public static List<University> documentList2UniversityList(List<Document> docList) {
 		List<University> universityList = new ArrayList<>();
 		for (Document doc : docList) {
-			universityList.add(document2University(doc));
+			universityList.add(document2University((Document) doc.get("value")));
 		}
 		return universityList;
 	}
