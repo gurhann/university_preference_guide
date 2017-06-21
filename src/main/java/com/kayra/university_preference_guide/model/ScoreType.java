@@ -4,6 +4,14 @@ public class ScoreType implements ExtInfo {
 
 	private String name;
 
+	public ScoreType() {
+
+	}
+
+	public ScoreType(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
 		return name;
 	}
