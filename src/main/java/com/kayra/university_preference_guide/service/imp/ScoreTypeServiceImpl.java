@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bson.Document;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.kayra.university_preference_guide.constant.InfoType;
 import com.kayra.university_preference_guide.exception.InfoTypeNullException;
 import com.kayra.university_preference_guide.exception.UnknownInfoTypeException;
@@ -13,9 +15,11 @@ import com.kayra.university_preference_guide.model.ScoreType;
 import com.kayra.university_preference_guide.persistence.MongoDriver;
 import com.kayra.university_preference_guide.service.ScoreTypeService;
 
+@Singleton
 public class ScoreTypeServiceImpl implements ScoreTypeService {
 	private MongoDriver driver;
 
+	@Inject
 	public ScoreTypeServiceImpl(MongoDriver driver) {
 		this.driver = driver;
 	}
