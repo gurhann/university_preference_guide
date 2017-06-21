@@ -10,7 +10,7 @@
 	<properties>
 		<jersey2.version>2.25</jersey2.version>
 		<mongo.version>3.4.2</mongo.version>
-		<guice.version>4.0</guice.version>
+		<guice.version>4.1.0</guice.version>
 		<servlet.version>3.1.0</servlet.version>
 		<junit.version>4.12</junit.version>
 		<mockito.version>2.8.9</mockito.version>
@@ -75,7 +75,11 @@
 			<artifactId>commons-collections</artifactId>
 			<version>${apache.common.collections.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.squarespace.jersey2-guice</groupId>
+			<artifactId>jersey2-guice-impl</artifactId>
+			<version>1.0.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
