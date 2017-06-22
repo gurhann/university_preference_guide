@@ -66,7 +66,7 @@ public class DepartmentServiceTest {
 		DepartmentSearchRequest req = getRequest();
 		//@formatter:off
 		when(mongoDriver.getDepartmentBySearchCriteria(req)).thenReturn(Arrays.asList(
-				new Document("name","Bilgisayar Mühendisliği").append(
+				new Document("name","Bilgisayar Mühendisliği").append("_id", 1).append(
 						"university", new Document("name","ATATÜRK ÜNİVERSİTESİ").append("city", "Erzurum").append("isPrivate", false)
 				).append("faculty_name", "Mühendislik Fakültesi").append("quota", 62).append("settled", 62)
 				.append("score_type", "MF-4").append("min_point", 279.5208).append("max_point", 383.9158)
