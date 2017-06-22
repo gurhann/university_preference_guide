@@ -26,6 +26,7 @@ public class DepartmentMapper {
 
 	public static Department document2Department(Document doc) {
 		Department department = new Department();
+		department.setId(doc.getInteger("_id"));
 		department.setName(doc.getString("name"));
 		department.setFaculty(new Faculty(doc.getString("faculty_name")));
 		department.setQuota(doc.getInteger("quota").shortValue());
