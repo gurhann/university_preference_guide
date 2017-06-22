@@ -62,6 +62,15 @@ public class DepartmentServiceTest {
 		assertNull(department.getScholarship());
 	}
 
+	@Test
+	public void getDepartmentNameListTest() {
+		initialNameListMockData();
+		List<String> allDepartments = departmentService.getAllDepartments();
+		assertEquals(2, allDepartments.size());
+		assertEquals("Bilgisayar Mühendisliği", allDepartments.get(0));
+		assertEquals("Yazılım Mühendisliği", allDepartments.get(1));
+	}
+
 	private void initialMockData() {
 		DepartmentSearchRequest req = getRequest();
 		//@formatter:off
@@ -74,6 +83,16 @@ public class DepartmentServiceTest {
 				.append("top_students_of_school_max_point", 240.34331).append("is_night", false).append("is_english", false)
 				.append("is_mtok", false).append("is_for_kktc", false))
 		);
+		//@formatter:on
+	}
+
+	private void initialNameListMockData() {
+		//@formatter:off
+		when(mongoDriver.getAllDepartmentNames()).thenReturn(Arrays.asList(
+				"Bilgisayar Mühendisliği",
+				"Bilgisayar Mühendisliği (İngilizce)",
+				"Yazılım Mühendisliği",
+				"Yazılım Mühendisliği (M.T.O.K))"));
 		//@formatter:on
 	}
 

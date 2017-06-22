@@ -8,4 +8,6 @@ import com.kayra.university_preference_guide.model.DepartmentSearchRequest;
 public interface DepartmentService {
 
 	public List<Department> getDepartmentList(DepartmentSearchRequest searchDTO);
+
+	public List<String> getAllDepartments();
 }

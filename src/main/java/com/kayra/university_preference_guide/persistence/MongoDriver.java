@@ -85,6 +85,12 @@ public class MongoDriver {
 		return collection.find(doc).into(new ArrayList<>());
 	}
 
+	public List<String> getAllDepartmentNames() {
+		MongoCollection<Document> collection = db.getCollection("departments");
+
+		return collection.distinct("name", String.class).into(new ArrayList<>());
+	}
+
 	private Bson prepareQuery(DepartmentSearchRequest req) {
 
 		List<Bson> andParams = new ArrayList<>();

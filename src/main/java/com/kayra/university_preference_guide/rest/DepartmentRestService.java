@@ -20,6 +20,13 @@ public class DepartmentRestService {
 
 	@Inject
 	private DepartmentService service;
+	
+	@GET
+	@Path("/getAll")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<String> getAllDepartments() {
+		return service.getAllDepartments();
+	}
 
 	@GET
 	@Path("/getByUniversity/{universityName}")
