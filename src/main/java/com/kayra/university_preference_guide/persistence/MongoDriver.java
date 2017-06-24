@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
@@ -145,8 +146,10 @@ public class MongoDriver {
 			List<Bson> departmentDocList = new ArrayList<>();
 
 			for (String departmentName : departmentNameList) {
+				Pattern regex = Pattern.compile(departmentName, Pattern.CASE_INSENSITIVE);
+
 				Document departmentDoc = new Document();
-				departmentDoc.append("name", departmentName);
+				departmentDoc.append("name", regex);
 				departmentDocList.add(departmentDoc);
 			}
 

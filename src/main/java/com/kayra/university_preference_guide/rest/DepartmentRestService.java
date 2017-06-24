@@ -20,7 +20,7 @@ public class DepartmentRestService {
 
 	@Inject
 	private DepartmentService service;
-	
+
 	@GET
 	@Path("/getAll")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
@@ -36,5 +36,14 @@ public class DepartmentRestService {
 		req.setUniversityList(Arrays.asList(new University(universityname)));
 		return service.getDepartmentList(req);
 
+	}
+
+	@GET
+	@Path("/getByDepartmentName/{departmentName}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<Department> getDepartmentsByDepartmentName(@PathParam("departmentName") String departmentName) {
+		DepartmentSearchRequest req = new DepartmentSearchRequest();
+		req.setDepartmentNameList(Arrays.asList(departmentName));
+		return service.getDepartmentList(req);
 	}
 }
