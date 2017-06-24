@@ -48,7 +48,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	private void addToNameList(String name, List<String> nameList) {
 		if (!nameList.contains(name)) {
-			nameList.add(name);
+			nameList.add(name.trim());
 		}
 	}
 
