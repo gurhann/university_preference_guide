@@ -18,7 +18,7 @@ public enum Scholarship {
 			return null;
 		}
 		for (Scholarship scholarship : Scholarship.values()) {
-			if (desc.equals(scholarship.getDesc())) {
+			if (desc.equals(scholarship.toString())) {
 				return scholarship;
 			}
 		}
