@@ -17,7 +17,7 @@ public class ScholarShipServiceTest {
 	@Test
 	public void getScolarShipTypesTest() {
 		List<Scholarship> scholarShipTypes = scholarShipService.getScholarShipTypes();
-		assertEquals(4, scholarShipTypes.size());
+		assertEquals(5, scholarShipTypes.size());
 		Scholarship [] values = Scholarship.values();
 		for (int i = 0; i < values.length; i++) {
 			assertEquals(values[i], scholarShipTypes.get(i));
