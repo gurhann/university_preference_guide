@@ -146,7 +146,7 @@ public class MongoDriver {
 			List<Bson> departmentDocList = new ArrayList<>();
 
 			for (String departmentName : departmentNameList) {
-				Pattern regex = Pattern.compile(departmentName, Pattern.CASE_INSENSITIVE);
+				Pattern regex = Pattern.compile(departmentName + "(\\s?\\(([^\\)]+)\\))?(\\s?\\(([^\\)]+)\\))", Pattern.CASE_INSENSITIVE);
 
 				Document departmentDoc = new Document();
 				departmentDoc.append("name", regex);
