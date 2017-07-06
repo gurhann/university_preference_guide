@@ -1,1 +1,1 @@
-web: java -jar target/dependency/webapp-runner.jar target/UniversityPreferenceGuideApi.war
+web: java -jar target/dependency/webapp-runner.jar --port 80 target/UniversityPreferenceGuideApi.war
