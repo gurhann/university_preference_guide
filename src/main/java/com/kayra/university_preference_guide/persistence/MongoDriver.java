@@ -28,7 +28,9 @@ import com.kayra.university_preference_guide.model.ExtInfoSearchRequest;
 import com.kayra.university_preference_guide.model.Faculty;
 import com.kayra.university_preference_guide.model.ScoreType;
 import com.kayra.university_preference_guide.model.University;
+import com.kayra.university_preference_guide.util.DeploymentUtils;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
@@ -39,8 +41,14 @@ public class MongoDriver {
 
 	@SuppressWarnings("resource")
 	public MongoDriver() {
-		Properties prop = getProperties();
-		db = new MongoClient(prop.getProperty("host"), Integer.parseInt(prop.getProperty("port"))).getDatabase(prop.getProperty("databaseName"));
+		if (DeploymentUtils.isDeployedToHeroku()) {
+			System.out.println("Buluta baglancak");
+			db = new MongoClient(new MongoClientURI(System.getenv("PROD_MONGOURL"))).getDatabase(System.getenv("PROD_MONGODB"));
+		} else {
+			System.out.println("Locale baglancak");
+			Properties prop = getProperties();
+			db = new MongoClient(prop.getProperty("host"), Integer.parseInt(prop.getProperty("port"))).getDatabase(prop.getProperty("databaseName"));
+		}
 	}
 
 	private Properties getProperties() {
