@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/dependency/webapp-runner.jar target/UniversityPreferenceGuideApi.war
+web: java  -jar target/dependency/webapp-runner.jar --port $PORT target/UniversityPreferenceGuideApi.war
