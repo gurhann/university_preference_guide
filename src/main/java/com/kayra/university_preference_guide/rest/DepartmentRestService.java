@@ -3,7 +3,10 @@ package com.kayra.university_preference_guide.rest;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,5 +48,13 @@ public class DepartmentRestService {
 		DepartmentSearchRequest req = new DepartmentSearchRequest();
 		req.setDepartmentNameList(Arrays.asList(departmentName));
 		return service.getDepartmentList(req);
+	}
+
+	@POST
+	@Path("/getDepartmentsByCriteria")
+	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<Department> getDepartmentsByCriteria(DepartmentSearchRequest searchReq) {
+		return service.getDepartmentList(searchReq);
 	}
 }
