@@ -26,6 +26,7 @@ public class DepartmentSearchRequest {
 	private Boolean isMTOK;
 	private List<Scholarship> scholarshipList;
 	private Boolean isForKktc;
+	private List<City> cityList;
 
 	public List<University> getUniversityList() {
 		return universityList;
@@ -187,10 +188,20 @@ public class DepartmentSearchRequest {
 		this.isForKktc = isForKktc;
 	}
 
+	public List<City> getCityList() {
+		return cityList;
+	}
+
+	public void setCityList(List<City> cityList) {
+		this.cityList = cityList;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((cityList == null) ? 0 : cityList.hashCode());
+		result = prime * result + ((departmentNameList == null) ? 0 : departmentNameList.hashCode());
 		result = prime * result + ((facultyList == null) ? 0 : facultyList.hashCode());
 		result = prime * result + ((isEnglish == null) ? 0 : isEnglish.hashCode());
 		result = prime * result + ((isForKktc == null) ? 0 : isForKktc.hashCode());
@@ -222,6 +233,16 @@ public class DepartmentSearchRequest {
 		if (getClass() != obj.getClass())
 			return false;
 		DepartmentSearchRequest other = (DepartmentSearchRequest) obj;
+		if (cityList == null) {
+			if (other.cityList != null)
+				return false;
+		} else if (!cityList.equals(other.cityList))
+			return false;
+		if (departmentNameList == null) {
+			if (other.departmentNameList != null)
+				return false;
+		} else if (!departmentNameList.equals(other.departmentNameList))
+			return false;
 		if (facultyList == null) {
 			if (other.facultyList != null)
 				return false;
@@ -322,11 +343,12 @@ public class DepartmentSearchRequest {
 
 	@Override
 	public String toString() {
-		return "DepartmentSearch [universityList=" + universityList + ", facultyList=" + facultyList + ", isThereEmptyScape=" + isThereEmptyScape + ", scoreTypeList=" + scoreTypeList
-				+ ", minPointStart=" + minPointStart + ", minPointEnd=" + minPointEnd + ", maxPointStart=" + maxPointStart + ", maxPointEnd=" + maxPointEnd + ", successSequenceStart="
-				+ successSequenceStart + ", successSequenceEnd=" + successSequenceEnd + ", topStudentOfSchoolMinPointStart=" + topStudentOfSchoolMinPointStart + ", topStudentOfSchoolMinPointEnd="
-				+ topStudentOfSchoolMinPointEnd + ", topStudentOfSchoolMaxPointStart=" + topStudentOfSchoolMaxPointStart + ", topStudentOfSchoolMaxPointEnd=" + topStudentOfSchoolMaxPointEnd
-				+ ", isNight=" + isNight + ", isEnglish=" + isEnglish + ", isMTOK=" + isMTOK + ", scholarshipList=" + scholarshipList + ", isForKktc=" + isForKktc + "]";
+		return "DepartmentSearchRequest [universityList=" + universityList + ", facultyList=" + facultyList + ", departmentNameList=" + departmentNameList + ", isThereEmptyScape=" + isThereEmptyScape
+				+ ", scoreTypeList=" + scoreTypeList + ", minPointStart=" + minPointStart + ", minPointEnd=" + minPointEnd + ", maxPointStart=" + maxPointStart + ", maxPointEnd=" + maxPointEnd
+				+ ", successSequenceStart=" + successSequenceStart + ", successSequenceEnd=" + successSequenceEnd + ", topStudentOfSchoolMinPointStart=" + topStudentOfSchoolMinPointStart
+				+ ", topStudentOfSchoolMinPointEnd=" + topStudentOfSchoolMinPointEnd + ", topStudentOfSchoolMaxPointStart=" + topStudentOfSchoolMaxPointStart + ", topStudentOfSchoolMaxPointEnd="
+				+ topStudentOfSchoolMaxPointEnd + ", isNight=" + isNight + ", isEnglish=" + isEnglish + ", isMTOK=" + isMTOK + ", scholarshipList=" + scholarshipList + ", isForKktc=" + isForKktc
+				+ ", cityList=" + cityList + "]";
 	}
 
 }

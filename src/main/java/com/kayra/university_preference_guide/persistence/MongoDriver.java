@@ -23,6 +23,7 @@ import com.google.inject.Singleton;
 import com.kayra.university_preference_guide.constant.Scholarship;
 import com.kayra.university_preference_guide.exception.InfoTypeNullException;
 import com.kayra.university_preference_guide.exception.UnknownInfoTypeException;
+import com.kayra.university_preference_guide.model.City;
 import com.kayra.university_preference_guide.model.DepartmentSearchRequest;
 import com.kayra.university_preference_guide.model.ExtInfoSearchRequest;
 import com.kayra.university_preference_guide.model.Faculty;
@@ -42,7 +43,6 @@ public class MongoDriver {
 	@SuppressWarnings("resource")
 	public MongoDriver() {
 		if (DeploymentUtils.isDeployedToHeroku()) {
-			System.out.println("Buluta baglancak");
 			db = new MongoClient(new MongoClientURI(System.getenv("PROD_MONGOURL"))).getDatabase(System.getenv("PROD_MONGODB"));
 		} else {
 			System.out.println("Locale baglancak");
@@ -118,6 +118,7 @@ public class MongoDriver {
 		checkIsNight(req.getIsNight(), andParams);
 		checkScholarShip(req.getScholarshipList(), andParams);
 		checkEmptySpace(req.getIsThereEmptyScape(), andParams);
+		checkCityNameList(req.getCityList(), andParams);
 		return Filters.and((Iterable<Bson>) andParams);
 	}
 
@@ -256,6 +257,20 @@ public class MongoDriver {
 	private void checkEmptySpace(Boolean emptySpace, List<Bson> andParams) {
 		if (BooleanUtils.isTrue(emptySpace)) {
 			andParams.add(where("this.quota > this.settled"));
+		}
+	}
+
+	private void checkCityNameList(List<City> cityList, List<Bson> andParams) {
+		if (CollectionUtils.isNotEmpty(cityList)) {
+
+			List<Bson> universityDocList = new ArrayList<>();
+			for (City city : cityList) {
+				Document cityDoc = new Document();
+				cityDoc.append("university.city", city.getName());
+				universityDocList.add(cityDoc);
+			}
+
+			andParams.add(or((Iterable<Bson>) universityDocList));
 		}
 	}
 
