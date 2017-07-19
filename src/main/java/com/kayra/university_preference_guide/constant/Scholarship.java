@@ -1,7 +1,7 @@
 package com.kayra.university_preference_guide.constant;
 
 public enum Scholarship {
-	FULL("(Tam Burslu)"), TWENTY_FIVE("(%25 Burslu)"), FIFTY("(%50 Burslu)"), SEVENTY_FIVE("%75 Burslu"), NO_SCHOLARSHIP("(Ücretli)");
+	FULL("Tam Burslu"), TWENTY_FIVE("%25 Burslu"), FIFTY("%50 Burslu"), SEVENTY_FIVE("%75 Burslu"), NO_SCHOLARSHIP("Ücretli");
 
 	private String desc;
 
@@ -18,7 +18,7 @@ public enum Scholarship {
 			return null;
 		}
 		for (Scholarship scholarship : Scholarship.values()) {
-			if (desc.equals(scholarship.toString())) {
+			if (desc.equals(scholarship.getDesc().toString())) {
 				return scholarship;
 			}
 		}

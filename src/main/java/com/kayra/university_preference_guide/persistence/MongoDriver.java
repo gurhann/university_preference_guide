@@ -239,7 +239,7 @@ public class MongoDriver {
 			List<Bson> scholarshipDocList = new ArrayList<>();
 			for (Scholarship scholarship : scholarShipList) {
 				Document scholarshipDoc = new Document();
-				scholarshipDoc.append("scholarship", scholarship.getDesc());
+				scholarshipDoc.append("scholarship", scholarship.toString());
 				scholarshipDocList.add(scholarshipDoc);
 			}
 
